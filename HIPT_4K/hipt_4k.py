@@ -40,6 +40,15 @@ class HIPT_4K(torch.nn.Module):
 		device4k=torch.device('cuda:1')):
 
 		super().__init__()
+		
+		if num_gpus > 1:
+			device256 = torch.device('cuda:0')
+			device4k = torch.device('cuda:1')
+		else:
+			device256 = device4k = torch.device('cuda:0')  # 只有 1 块 GPU，就都放在同一块上
+
+			
+			
 		self.model256 = get_vit256(pretrained_weights=model256_path).to(device256)
 		self.model4k = get_vit4k(pretrained_weights=model4k_path).to(device4k)
 		self.device256 = device256
