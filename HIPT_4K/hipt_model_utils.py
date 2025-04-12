@@ -96,10 +96,10 @@ def get_vit4k(pretrained_weights, arch='vit4k_xs', device=torch.device('cuda:1')
 
     if os.path.isfile(pretrained_weights):
 	with torch.serialization.safe_globals([np._core.multiarray.scalar]):
-        	state_dict = torch.load(pretrained_weights, map_location="cpu",weights_only=False)
+		state_dict = torch.load(pretrained_weights, map_location="cpu",weights_only=False)
         if checkpoint_key is not None and checkpoint_key in state_dict:
-            print(f"Take key {checkpoint_key} in provided checkpoint dict")
-            state_dict = state_dict[checkpoint_key]
+		print(f"Take key {checkpoint_key} in provided checkpoint dict")
+		state_dict = state_dict[checkpoint_key]
         # remove `module.` prefix
         state_dict = {k.replace("module.", ""): v for k, v in state_dict.items()}
         # remove `backbone.` prefix induced by multicrop wrapper
