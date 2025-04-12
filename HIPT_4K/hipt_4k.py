@@ -40,6 +40,9 @@ class HIPT_4K(torch.nn.Module):
 		device4k=torch.device('cuda:1')):
 
 		super().__init__()
+
+		#避免没有多个gpu的情况
+		num_gpus = torch.cuda.device_count()  # 获取 GPU 数量
 		
 		if num_gpus > 1:
 			device256 = torch.device('cuda:0')
