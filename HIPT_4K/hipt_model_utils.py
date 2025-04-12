@@ -94,7 +94,8 @@ def get_vit4k(pretrained_weights, arch='vit4k_xs', device=torch.device('cuda:1')
     model4k.eval()
     model4k.to(device)
 
-    if os.path.isfile(pretrained_weights):
+
+    if os.path.isfile(pretrained_weights): #这里缩进可能会报错
 	with torch.serialization.safe_globals([np._core.multiarray.scalar]):
 		state_dict = torch.load(pretrained_weights, map_location="cpu",weights_only=False)
         if checkpoint_key is not None and checkpoint_key in state_dict:
